@@ -1,0 +1,38 @@
+<div class = "container-fluid" style= "padding: 80px 0 0 0; text-align:center;">
+  <div class = "jumbotron">
+    <div class = "panel panel-info" style = "display:inline-block; padding: 20px 20px 20px 20px;background-color:#1f4e5f">
+
+      <%= image_tag current_user.profilephoto.url(:medium),class: "img-circle" %><h1><span style = "color:#fcbe32;"><%= current_user.name %></span></h1> 
+      <br>
+      <h2><span style = "color:#fcbe32;"><%= current_user.posts.count%> posts</h2> </span><%= link_to "Edit Account", edit_user_registration_path, id: "nav-text" %>
+      <div class= "container-fluid" style = "padding:80px">
+          <% @posts.each do |post| %>
+
+          <% if post.user == current_user %>
+          <div class ="container-fluid" style = "float:left;border-radius:5px;padding:30px;margin:20px;background-color:white">
+
+
+
+            <div class = "container-fluid" style = "display:inline-block">
+              <% if post.updated_at == post.created_at %>
+              <div style = "float:right;color:grey"><%= time_ago_in_words(post.created_at) %></div>
+              <% else %>
+
+              <div style = "float:right;color:grey">Edited <%= time_ago_in_words(post.updated_at) %></div>
+              <% end %>
+              <br>
+              <div style = "display:inline-block"><%= image_tag post.image.url(:thumb) %></div>
+              <div style ="text-align:center;color:#1f4e5f"><h3><strong><%= link_to "#{post.title}", post %></strong></h3></div>
+            
+            </div>
+
+          
+
+          </div>
+          <% end %>
+          <%end %>
+      </div>
+
+    </div>
+  </div>
+</div>

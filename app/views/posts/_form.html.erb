@@ -1,0 +1,45 @@
+
+
+<%= form_for @post, html: {multipart: true} do |f| %> 
+<div class= "container-fluid" style = "width: 100%;text-align:center;">
+  <div class ="container-fluid" style = "margin:0 auto;">
+
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class = "container-fluid" style = "display:inline-block">
+    <div class = "form-group">
+    <div class="file_botton" style ="margin:auto">
+      <%= f.label :image %><br>
+      <%= f.file_field :image %>
+    </div>
+    <br>
+    <div class="field">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+    <br>
+    <div class="field">
+      <%= f.label :body %>
+      <%= f.text_area :body %> 
+    </div>
+    <div class="actions">
+      <%= f.submit class: "btn btn-primary"%>
+    </div>
+  </div>
+
+
+  </div>
+</div>
+<% end %>
+

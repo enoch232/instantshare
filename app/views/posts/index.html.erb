@@ -1,0 +1,70 @@
+
+
+
+<div class= "container-fluid" style = "text-align:center;padding: 80px 0 0 0">
+  <div  class ="container-fluid" style= "display:inline-block;padding:20px 300px; background-color:#1f4e5f;border-radius:20px">
+          <span style = "color:white"><%= form_tag posts_path, :method => 'get' do %> <%= @posts.count %> posts</span>
+          <span style = "color:black">
+          <div class = "form-group form-inline">
+          <%= text_field_tag :search, params[:search], placeholder: "Search...", class: "form-control" ,style: "float: left" %>
+          <%= submit_tag "Search", :name => nil, class: "btn", style: "background-color:#fcbe32;float: right" %></span>
+          </div>
+          <% end %>
+  </div>
+  <br>
+    <% if @posts.count == 0 %>
+  <h1>No result.</h1>
+  <% end %>
+  <br>
+
+  <% @posts.each do |post| %>
+
+
+  <div class ="container-fluid" style = "width:;margin: 0 auto;background-color:white;display:inline-block; box-shadow: 10px 10px 10px 10px #888888;border-radius:5px">
+
+
+
+  <div class = "container-fluid" style = "display:inline-block">
+    <div style="padding:10px">
+    </div>
+    <div style = "float:left;color:#79a8a9"><%= image_tag post.user.profilephoto.url(:thumb), class: "img-circle" %> <%= post.user.name %>
+    </div>
+    <% if post.updated_at == post.created_at %>
+      <div style = "float:right;color:grey"><%= time_ago_in_words(post.created_at) %></div>
+    <% else %>
+      <div style = "float:right;color:grey">Edited <%= time_ago_in_words(post.updated_at) %></div>
+    <% end %>
+
+    <div style = "padding:30px">
+    </div>
+
+    <div style = "display:inline-block"><%= image_tag post.image.url(:medium), style: "height:400px;width:400px" %></div>
+    <div style ="text-align:center;color:#1f4e5f"><h3><strong><%= link_to "#{post.title}", post %></strong></h3></div>
+    <div class ="container-fluid" style = "">
+      <%= link_to like_post_path(post), method: :put, class: "btn btn-default btn-sm" do %>
+      <span class = "glyphicon glyphicon-thumbs-up"></span>
+      Like
+      <%= post.get_upvotes.size %>
+      <% end %>
+      <%= link_to dislike_post_path(post), method: :put, class: "btn btn-default btn-sm" do %>
+      <span class = "glyphicon glyphicon-thumbs-down"></span>
+      Disike
+      <%= post.get_downvotes.size %>
+      <% end %>
+
+      <div class= "panel">
+      <span class="glyphicons glyphicons-comments"></span>
+      Comments
+      <span class="badge"><%= post.comments.size %></span>
+      </div>
+      
+    </div>
+  </div>
+  
+
+  </div>
+  <div style = "height:60px">
+  </div>
+  <% end %>
+</div>
+

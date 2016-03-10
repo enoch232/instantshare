@@ -1,0 +1,76 @@
+
+<div class= "container-fluid" style = "text-align:center;padding: 80px 0 0 0">
+  <div class ="container-fluid" style = "width:;margin: 0 auto;background-color:white;display:inline-block; box-shadow: 10px 10px 10px 10px #888888;">
+
+
+
+  <div class = "container-fluid" style = "display:inline-block;padding:0 0 30px 0">
+    <div style = "padding:20px">
+    </div>
+    <div style = "float:left;color:#79a8a9"><%= image_tag @post.user.profilephoto.url(:thumb), class: "img-circle" %> <%= @post.user.name %></div>
+    <% if @post.updated_at == @post.created_at %>
+    <div style = "float:right;color:grey"><%= time_ago_in_words(@post.created_at) %></div>
+    <% else %>
+    <div style = "float:right;color:grey">Edited <%= time_ago_in_words(@post.updated_at) %></div>
+    <% end %>
+    <div style = "padding:30px">
+    </div>
+    <div style = "display:inline-block"><%= image_tag @post.image.url(:large) %></div>
+    <div style ="text-align:center;color:#1f4e5f"><h2><strong><%= @post.title %></strong></h2></div>
+    <div style ="text-align:center;color:#fcbe32"><h4><strong><%= @post.body %></strong></h3></div>
+  </div>
+  	<div style = "height:60px">
+  		<div style = "float:left;width:auto;display:inline-block" id = "comment-button">
+  			 <strong>Comments </strong><span class="badge"><%= @post.comments.count%></span>
+  		</div>
+
+
+
+  		<div>
+  			<div id = "comments-list">
+  				<%= render :partial => @post.comments %>
+  			</div>
+  			<br>
+  			<div style = "height:20px">
+  				
+  			</div>
+  			<div>
+	  			<%= simple_form_for [@post, Comment.new], remote: true do |f| %>
+	  				<%= f.text_area :body, class: "form-control focus-area", id: "focus-area" %>
+	  				<br>
+	  				<%= f.submit "Add comment", class: "btn btn-primary pull-right addcomment"%>
+	  				</br>
+				<% end %>
+			</div>
+
+  		</div>
+
+  	</div>
+
+  </div>
+  <div style = "padding: 30px">
+  	<%= link_to 'Back', posts_path, class: "btn btn-default" %>
+  	<% if @post.user == current_user %> 
+		<%= link_to 'Edit', edit_post_path(@post), class: "btn btn-default" %>
+		<%= link_to 'Delete', @post, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"%>
+	  <% end %>
+   </div>
+
+</div>
+<script>
+var n =0;
+$(document).ready(function(){
+	$("#comment-button").click(function(){
+		event.preventDefault();
+		$("#comments-list").fadeToggle(1000);
+		$(".focus-area").focus();
+    
+	});
+
+  $(".addcomment").click(function(){
+    n = n +1;
+    $(".badge").text(<%= @post.comments.count%> + n);
+  });
+	
+});
+</script>

@@ -1,0 +1,18 @@
+<%= div_for(comment) do %>
+  <br>
+  <hr>
+  <div id ="comments ">
+    <div id = "comment-show" style = "float:left" class = "pull-left">
+      <%= comment.body %>
+    </div>
+    <% if @post.user == current_user || comment.user == current_user%> 
+      <div id = "comment-show" style = "float:left" class = "pull-right">
+      <%= link_to 'Delete', comment, method: :delete %>
+      </div>
+    <% end %>
+    <br>
+    <div style = "float:left">
+      <small>Posted by <%= comment.user.name %> <%= time_ago_in_words(comment.created_at) %> ago.</small>
+    </div>
+  </div>
+<% end %>
