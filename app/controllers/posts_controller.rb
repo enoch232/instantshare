@@ -8,7 +8,8 @@ class PostsController < ApplicationController
   
     @posts = Post.where(["title LIKE ?","%#{params[:search]}%"])
     @posts = @posts.order("posts.updated_at desc")
-    @posts = @posts.where(["created_at >= ? AND created_at <= ?", Date.today.beginning_of_day, Date.today.end_of_day])
+    #only recent
+    #@posts = @posts.where(["created_at >= ? AND created_at <= ?", Date.today.beginning_of_day, Date.today.end_of_day])
   end
 
   # GET /posts/1
