@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 gem 'simple_form'
 gem 'devise'
+gem 'aws-sdk'
+gem 'ruby'
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'acts_as_votable', '~> 0.10.0'
