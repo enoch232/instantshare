@@ -1,3 +1,5 @@
  $('#comments-list').append("<%= j render @comment %>");
  $('#focus-area').val("");
  $('#focus-area').focus();
+var commentcount = <%= @post.comments.count %>;
+$(".badge").text(parseInt(commentcount));

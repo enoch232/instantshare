@@ -1,1 +1,4 @@
- $('#comments-list').remove("<%= j render @comment %>");
+$("div#<%= dom_id(@comment)%>").hide();
+var commentcount = <%= @post.comments.count %>;
+$(".badge").text(parseInt(commentcount));
+

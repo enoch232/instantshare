@@ -21,7 +21,7 @@
   </div>
   	<div style = "height:60px">
   		<div style = "float:left;width:auto;display:inline-block" id = "comment-button">
-  			 <a href = "#" style = "text-decoration:none"><strong>Comments </strong></a><span class="badge"><%= @post.comments.count%></span>
+  			 <a href = "#" style = "text-decoration:none"><strong>Comments </strong></a><span class="badge" id = "commentcount"><%= @post.comments.count%></span>
   		</div>
 
 
@@ -38,7 +38,7 @@
 	  			<%= simple_form_for [@post, Comment.new], remote: true do |f| %>
 	  				<%= f.text_area :body, class: "form-control focus-area", id: "focus-area" %>
 	  				<br>
-	  				<%= f.submit "Add comment", class: "btn btn-primary pull-right addcomment"%>
+	  				<%= f.submit "Add comment", class: "btn btn-primary pull-right addcomment" , remote: true %>
 	  				</br>
 				<% end %>
 			</div>
@@ -67,10 +67,8 @@ $(document).ready(function(){
     
 	});
 
-  $(".addcomment").click(function(){
-    n = n +1;
-    $(".badge").text(<%= @post.comments.count%> + n);
-  });
+  $(".badge").text(<%= @post.comments.count%>);
+
 	
 });
 </script>

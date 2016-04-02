@@ -7,7 +7,7 @@
     </div>
     <% if @post.user == current_user || comment.user == current_user%> 
       <div id = "comment-show" style = "float:left" class = "pull-right">
-      <%= link_to 'Delete', comment, method: :delete %>
+      <%= link_to 'Delete', comment, method: :delete,  class: "deletebutton", remote: true %>
       </div>
     <% end %>
     <br>
