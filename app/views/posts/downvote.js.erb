@@ -1,2 +1,2 @@
-$(".showupvotes").text("<%= @post.get_upvotes.size %>")
-$(".showdownvotes").text("<%= @post.get_downvotes.size %>")
+$("#<%= dom_id(@post) %> .showupvotes").text("<%= @post.get_upvotes.size %>")
+$("#<%= dom_id(@post) %> .showdownvotes").text("<%= @post.get_downvotes.size %>")

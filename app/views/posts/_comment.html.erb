@@ -1,0 +1,13 @@
+<%= div_for(post) do %>
+<%= link_to like_post_path(post), method: :put, class: "btn btn-default btn-sm", remote: true do %>
+<span class = "glyphicon glyphicon-thumbs-up"></span>
+Like
+<span class = "showupvotes"><%= post.get_upvotes.size %></span>
+<% end %>
+      
+<%= link_to dislike_post_path(post), method: :put, class: "btn btn-default btn-sm", remote: true do %>
+<span class = "glyphicon glyphicon-thumbs-down"></span>
+Disike
+<span class = "showdownvotes"><%= post.get_downvotes.size %></span>
+<% end %>
+<% end %>
