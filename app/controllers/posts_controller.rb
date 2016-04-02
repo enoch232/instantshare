@@ -1,21 +1,15 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:show, :edit, :update, :destory]
-  # GET /posts
-  # GET /posts.json
 
-  def index
-  
+  def index 
     @posts = Post.where(["title LIKE ?","%#{params[:search]}%"])
     @posts = @posts.order("posts.updated_at desc")
     #only recent
     #@posts = @posts.where(["created_at >= ? AND created_at <= ?", Date.today.beginning_of_day, Date.today.end_of_day])
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
   def show
-
   end
 
   def upvote
@@ -36,22 +30,17 @@ class PostsController < ApplicationController
     
   end
 
-  # GET /posts/new
   def new
     @post = Post.new
     @post.user = current_user
   end
 
-  # GET /posts/1/edit
   def edit
   end
 
-  # POST /posts
-  # POST /posts.json
   def create
     @post = Post.new(post_params)
     @post.user = current_user
-
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -63,8 +52,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
       if @post.update(post_params)
@@ -77,8 +64,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
   def destroy
     @post.destroy
     respond_to do |format|
@@ -88,12 +73,10 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:title, :body, :image, :profilephoto)
     end

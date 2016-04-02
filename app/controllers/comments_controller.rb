@@ -1,16 +1,10 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
-  # GET /comments
-  # GET /comments.json
-
-  # POST /comments
-  # POST /comments.json
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.new(comment_params)
     @comment.user = current_user
-
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @post, notice: 'Comment was successfully created.' }
@@ -22,8 +16,7 @@ class CommentsController < ApplicationController
       end
     end
   end
-  # DELETE /comments/1
-  # DELETE /comments/1.json
+  
   def destroy
     @comment.destroy
     @post=  Post.find(@comment.post_id)
